@@ -38,6 +38,5 @@ class BookSearch(ListView):
         q = self.request.GET.get("q")
 
         if q:
-            print(type(q))
             books = BookService.search(q)
             return books
