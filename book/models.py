@@ -8,6 +8,9 @@ class Author(models.Model):
     birth_date = models.DateField()
     biography = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=20)

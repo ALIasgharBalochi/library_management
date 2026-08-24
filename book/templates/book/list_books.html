@@ -1,0 +1,55 @@
+{% extends "book/base.html" %} {% block content %}
+
+<div class="container">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">📚 لیست کتاب‌ها</h1>
+    <p class="text-muted">کتاب‌های موجود در کتابخانه</p>
+  </div>
+
+  <div class="row g-4">
+    {% for book in books %}
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <!-- Title -->
+          <h4 class="card-title fw-bold mb-3">{{ book.title }}</h4>
+
+          <!-- Author -->
+          <p class="card-text">
+            <strong>✍️ نویسنده:</strong>
+            {{ book.author }}
+          </p>
+
+          <!-- Pages -->
+          <p class="card-text">
+            <strong>📖 تعداد صفحات:</strong>
+            {{ book.pages }}
+          </p>
+
+          <!-- Price -->
+          <p class="card-text">
+            <strong>💰 قیمت:</strong>
+            {{ book.price }} تومان
+          </p>
+        </div>
+
+        <div class="card-footer bg-white border-0 pb-3">
+          <a href="#" class="btn btn-outline-primary w-100"> مشاهده جزئیات </a>
+        </div>
+      </div>
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+      <div class="alert alert-info text-center">
+        📚 هنوز هیچ کتابی ثبت نشده است.
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
