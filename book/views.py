@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from book.models import Book
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, FormView, UpdateView
 from django.urls import reverse_lazy
 from book.form import CrateBookForm
 from book.service import BookService
@@ -23,6 +23,17 @@ class BookDetail(DetailView):
 class CreateBookView(FormView):
     form_class = CrateBookForm
     template_name = "book/create_book.html"
+    success_url = reverse_lazy("book_list")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class UpdateBookView(UpdateView):
+    model = Book
+    form_class = CrateBookForm
+    template_name = "book/update_book.html"
     success_url = reverse_lazy("book_list")
 
     def form_valid(self, form):
