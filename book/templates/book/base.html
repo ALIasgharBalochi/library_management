@@ -73,10 +73,16 @@
           </a>
 
           <!-- Add Book -->
-          <a href="#" class="btn btn-primary"> افزودن کتاب جدید </a>
+          <a href="{% url 'create_book' %}" class="btn btn-primary">
+            افزودن کتاب جدید
+          </a>
 
           <!-- Search -->
-          <form class="d-flex search-box">
+          <form
+            method="get"
+            action="{% url 'search'  %}"
+            class="d-flex search-box"
+          >
             <input
               type="search"
               name="q"

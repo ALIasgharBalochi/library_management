@@ -1,9 +1,12 @@
 from book.models import Book, Author
+from django.db.models import Q
 
 
 class BookService:
 
-    @classmethod
-    def get_book(book_id: int):
-        book = Book.objects.filter(id=id)
-        return book
+    @staticmethod
+    def search(q):
+        books = Book.objects.filter(
+            Q(title__icontains=q) | Q(author__name__icontains=q)
+        )
+        return books
