@@ -49,6 +49,20 @@ class DeleteBookView(DeleteView):
     success_url = reverse_lazy("book_list")
 
 
+class BookFiltering(ListView):
+    template_name = "book/list_books.html"
+    context_object_name = "books"
+
+    def get_queryset(self):
+        pub_date = self.request.GET.get("pub_date")
+        min_price = self.request.GET.get("min_price")
+        max_price = self.request.GET.get("max_price")
+
+        if pub_date or min_price or max_price:
+            books = BookService.filtering(pub_date, min_price, max_price)
+            return books
+
+
 class BookSearch(ListView):
     template_name = "book/list_books.html"
     context_object_name = "books"
