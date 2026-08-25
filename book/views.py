@@ -2,7 +2,7 @@ from django.shortcuts import render
 from book.models import Book, Category
 from django.views.generic import ListView, DetailView, FormView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from book.form import CrateBookForm
+from book.form import CrateBookForm, CategoryForm
 from book.service import BookService
 
 # Create your views here.
@@ -95,3 +95,14 @@ class BookSearch(ListView):
         context["categorys"] = Category.objects.all()
 
         return context
+
+
+# category
+class CreateCategoryView(FormView):
+    form_class = CategoryForm
+    template_name = "book/create_category.html"
+    success_url = reverse_lazy("book_list")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

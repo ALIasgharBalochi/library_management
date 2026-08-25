@@ -7,6 +7,7 @@ from book.views import (
     DeleteBookView,
     UpdateBookView,
     BookFiltering,
+    CreateCategoryView,
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path("delete_book/<int:pk>", DeleteBookView.as_view(), name="delete_book"),
     path("search/", BookSearch.as_view(), name="search"),
     path("filter/", BookFiltering.as_view(), name="filter"),
+    path("create_category/", CreateCategoryView.as_view(), name="create_category"),
 ]
