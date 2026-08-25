@@ -77,9 +77,17 @@
           </div>
 
           <!-- Filter Button -->
-          <div class="col-md-1 d-grid">
+          <div class="col-md-4 d-flex gap-2">
             <button type="submit" class="btn btn-primary" title="اعمال فیلتر">
               🔎
+            </button>
+            <button
+              class="btn btn-outline-primary"
+              type="submit"
+              formaction="{% url 'delete_books_filtering' %}"
+              title="حذف کتاب ها"
+            >
+              🗑️ حذف کتاب‌ها
             </button>
           </div>
         </div>
