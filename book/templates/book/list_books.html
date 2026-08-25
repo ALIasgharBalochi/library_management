@@ -55,6 +55,26 @@
               min="0"
             />
           </div>
+          <!-- Category Filter -->
+          <div class="col-md-3">
+            <label for="category" class="form-label fw-bold">
+              📚 دسته‌بندی
+            </label>
+
+            <select
+              name="category"
+              id="category"
+              class="form-select category-select"
+            >
+              <option value="">همه دسته‌بندی‌ها</option>
+
+              {% for category in categorys %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+              {% empty %}
+              <option value="" disabled>دسته‌بندی وجود ندارد</option>
+              {% endfor %}
+            </select>
+          </div>
 
           <!-- Filter Button -->
           <div class="col-md-1 d-grid">

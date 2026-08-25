@@ -12,7 +12,7 @@ class BookService:
         return books
 
     @staticmethod
-    def filtering(pub_date, min_p, max_p):
+    def filtering(pub_date, min_p, max_p, category):
         books = Book.objects.all()
 
         if pub_date:
@@ -21,5 +21,7 @@ class BookService:
             books = books.filter(price__gte=min_p)
         if max_p:
             books = books.filter(price__lte=max_p)
+        if category:
+            books = books.filter(category=category)
 
         return books
