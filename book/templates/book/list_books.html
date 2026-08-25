@@ -116,6 +116,16 @@
         </div>
 
         <div class="card-footer bg-white border-0 pb-3">
+          <form
+            method="post"
+            action="{% url 'add_fav_books' user.id book.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="btn btn-outline-primary w-100 my-1">
+              ❤️ اضافه به علاقه‌مندی‌ها
+            </button>
+          </form>
           <a
             href="{% url 'book_detail' book.id %}"
             class="btn btn-outline-primary w-100"

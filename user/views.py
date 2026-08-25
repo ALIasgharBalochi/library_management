@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import FormView
+from django.http.response import HttpResponse
+from django.views.generic import FormView, ListView
 from .form import RegisterForm, LoginForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login
+from .service import UserService
+from book.models import Book
 
 # Create your views here.
 
@@ -35,3 +38,19 @@ class LoginView(FormView):
         print("formet moshkel dare aghaaaaaaaaa")
         print(form.errors)
         return super().form_invalid(form)
+
+
+class UserFaveBooks(ListView):
+    template_name = "book/list_books.html"
+    context_object_name = "books"
+
+    def get_queryset(self):
+        userid = int(self.kwargs["userid"])
+        books = UserService.get_fave_book(userid)
+        if books:
+            return books
+
+
+def add_to_favarit(request, userid, bookid):
+    res = UserService.add_to_fave_book(userid, bookid)
+    return HttpResponse("book successfuley add to yor favarit book")

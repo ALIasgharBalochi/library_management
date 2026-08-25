@@ -179,9 +179,15 @@
         <!-- Authentication -->
         <div class="d-flex gap-2">
           {% if user.is_authenticated %}
+          <!-- 
+          <span class="text-success"> سلام {{ user.username }} 👋 </span> -->
 
-          <span class="text-success"> سلام {{ user.username }} 👋 </span>
-
+          <a
+            href="{% url 'user_fav_books' user.id %}"
+            class="btn btn-outline-primary"
+          >
+            کتاب های مورد علاقه
+          </a>
           {% else %}
 
           <a href="{% url 'register' %}" class="btn btn-outline-primary">
@@ -191,11 +197,6 @@
           <a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
 
           {% endif %}
-          <!-- <a href="{% url 'register' %}" class="btn btn-outline-success">
-            Sign Up
-          </a>
-
-          <a href="{% url 'login' %}" class="btn btn-success"> Login </a> -->
         </div>
       </div>
     </nav>
