@@ -1,0 +1,40 @@
+{% extends "book/base.html" %} {% block content %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card border-0 shadow-sm login-card">
+        <div class="card-body p-5">
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <div class="login-icon">🔐</div>
+
+            <h2 class="fw-bold mt-3">ورود به حساب</h2>
+
+            <p class="text-muted">به کتابخانه خوش آمدید</p>
+          </div>
+
+          <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-success btn-lg login-btn">
+                ورود
+              </button>
+            </div>
+          </form>
+
+          <div class="text-center mt-4">
+            <span class="text-muted"> حساب کاربری ندارید؟ </span>
+
+            <a href="{% url 'register' %}" class="text-decoration-none fw-bold">
+              ثبت نام
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
