@@ -45,9 +45,14 @@
             <a href="{% url 'book_list' %}" class="btn btn-outline-secondary">
               ← بازگشت به لیست
             </a>
-            <a href="{% url 'update_book' book.id %}" class="btn btn-primary">
-              ویرایش کتاب
-            </a>
+            <div>
+              <a href="{% url 'delete_book' book.id %}" class="btn btn-danger">
+                حذف کتاب
+              </a>
+              <a href="{% url 'update_book' book.id %}" class="btn btn-primary">
+                ویرایش کتاب
+              </a>
+            </div>
           </div>
         </div>
       </div>

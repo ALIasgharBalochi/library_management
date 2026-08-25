@@ -5,6 +5,67 @@
     <h1 class="fw-bold">📚 لیست کتاب‌ها</h1>
     <p class="text-muted">کتاب‌های موجود در کتابخانه</p>
   </div>
+  <!-- Filters -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+      <form method="get">
+        <div class="row g-3 align-items-end">
+          <!-- publish date -->
+          <div class="col-md-3">
+            <label for="min_price" class="form-label fw-bold">
+              تاریخ انتشار
+            </label>
+
+            <input
+              type="date"
+              id="pub_date"
+              name="pub_date"
+              class="form-control"
+            />
+          </div>
+
+          <!-- Minimum Price -->
+          <div class="col-md-3">
+            <label for="min_price" class="form-label fw-bold">
+              💰 حداقل قیمت
+            </label>
+
+            <input
+              type="number"
+              id="min_price"
+              name="min_price"
+              class="form-control"
+              placeholder="مثلاً 100000"
+              min="0"
+            />
+          </div>
+
+          <!-- Maximum Price -->
+          <div class="col-md-3">
+            <label for="max_price" class="form-label fw-bold">
+              💰 حداکثر قیمت
+            </label>
+
+            <input
+              type="number"
+              id="max_price"
+              name="max_price"
+              class="form-control"
+              placeholder="مثلاً 500000"
+              min="0"
+            />
+          </div>
+
+          <!-- Filter Button -->
+          <div class="col-md-1 d-grid">
+            <button type="submit" class="btn btn-primary" title="اعمال فیلتر">
+              🔎
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div class="row g-4">
     {% for book in books %}
