@@ -5,7 +5,7 @@ from .form import RegisterForm, LoginForm
 from django.urls import reverse_lazy
 from django.contrib.auth import login
 from .service import UserService
-from book.models import Book
+from book.models import Category
 
 # Create your views here.
 
@@ -50,7 +50,14 @@ class UserFaveBooks(ListView):
         if books:
             return books
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["categorys"] = Category.objects.all()
+
+        return context
+
 
 def add_to_favarit(request, userid, bookid):
     res = UserService.add_to_fave_book(userid, bookid)
-    return HttpResponse("book successfuley add to yor favarit book")
+    return HttpResponse("book successfuley add to yor favarit book <a>")
