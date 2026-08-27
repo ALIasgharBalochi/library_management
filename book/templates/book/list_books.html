@@ -124,6 +124,7 @@
         </div>
 
         <div class="card-footer bg-white border-0 pb-3">
+          {% if user.is_authenticated %}
           <form
             method="post"
             action="{% url 'add_fav_books' user.id book.id %}"
@@ -134,6 +135,11 @@
               ❤️ اضافه به علاقه‌مندی‌ها
             </button>
           </form>
+          {% else %}
+          <button class="btn btn-outline-primary w-100 my-1">
+            ❤️ اضافه به علاقه‌مندی‌ها
+          </button>
+          {% endif %}
           <a
             href="{% url 'book_detail' book.id %}"
             class="btn btn-outline-primary w-100"
