@@ -1,0 +1,11 @@
+{
+  "name": "bookly-local-tailwind",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./book/static/book/src/input.css -o ./book/static/book/css/output.css --watch",
+    "build": "tailwindcss -i ./book/static/book/src/input.css -o ./book/static/book/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -80,3 +80,9 @@ build/
 
 migrations/
 migrations/__pycache__/
+
+===========================
+#static
+===========================
+node_modules/
+/node_modules/
