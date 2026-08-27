@@ -1,0 +1,128 @@
+{% extends "book/base.html" %} {% block extra_css %}
+<style>
+  .delete-card {
+    max-width: 650px;
+    margin: 60px auto;
+    padding: 45px 35px;
+
+    background: #fff;
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  }
+
+  .delete-icon {
+    width: 90px;
+    height: 90px;
+
+    margin: 0 auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 42px;
+  }
+
+  .success-icon {
+    background: #e8f7ee;
+  }
+
+  .error-icon {
+    background: #fff0f0;
+  }
+
+  .delete-card h1 {
+    font-size: 28px;
+    font-weight: 700;
+
+    margin-bottom: 15px;
+  }
+
+  .delete-card p {
+    color: #6c757d;
+    line-height: 2;
+
+    margin-bottom: 30px;
+  }
+
+  .book-count {
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #198754;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .buttons .btn {
+    height: 48px;
+
+    padding: 0 25px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<div class="delete-card">
+  {% if error %}
+
+  <!-- ERROR -->
+
+  <div class="delete-icon error-icon">⚠️</div>
+
+  <h1>فیلتری وارد نشده است</h1>
+
+  <p>
+    برای حذف کتاب‌ها ابتدا حداقل یکی از فیلترها
+    <strong>تاریخ انتشار، حداقل قیمت، حداکثر قیمت یا دسته‌بندی</strong>
+    را وارد کنید.
+  </p>
+
+  <div class="buttons">
+    <a href="{% url 'book_list' %}" class="btn btn-primary">
+      📚 برگشت به کتاب‌ها
+    </a>
+  </div>
+
+  {% else %}
+
+  <!-- SUCCESS -->
+
+  <div class="delete-icon success-icon">✅</div>
+
+  <h1>کتاب‌ها با موفقیت حذف شدند</h1>
+
+  <p>
+    تعداد
+    <span class="book-count"> {{ count }} </span>
+    کتاب مطابق فیلترهای وارد شده پیدا و حذف شد.
+  </p>
+
+  <div class="buttons">
+    <a href="{% url 'book_list' %}" class="btn btn-primary">
+      📚 مشاهده کتاب‌ها
+    </a>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -141,7 +141,9 @@
     <nav class="navbar navbar-expand-lg bg-white py-3">
       <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand text-primary" href="#"> 📚 کتابخانه </a>
+        <a class="navbar-brand text-primary" href="{% url 'home' %}">
+          📚 کتابخانه
+        </a>
 
         <!-- Center Buttons -->
         <div class="d-flex align-items-center gap-2 mx-auto">
@@ -179,9 +181,6 @@
         <!-- Authentication -->
         <div class="d-flex gap-2">
           {% if user.is_authenticated %}
-          <!-- 
-          <span class="text-success"> سلام {{ user.username }} 👋 </span> -->
-
           <a
             href="{% url 'user_fav_books' user.id %}"
             class="btn btn-outline-primary"

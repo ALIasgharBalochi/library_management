@@ -60,4 +60,11 @@ class UserFaveBooks(ListView):
 
 def add_to_favarit(request, userid, bookid):
     res = UserService.add_to_fave_book(userid, bookid)
-    return HttpResponse("book successfuley add to yor favarit book <a>")
+
+    return render(
+        request,
+        "user/favorit_success.html",
+        {
+            "bookid": bookid,
+        },
+    )

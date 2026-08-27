@@ -4,9 +4,12 @@ from django.views.generic import ListView, DetailView, FormView, UpdateView, Del
 from django.urls import reverse_lazy
 from book.form import CrateBookForm, CategoryForm
 from book.service import BookService
-from django.http.response import HttpResponse
 
 # Create your views here.
+
+
+def home(request):
+    return render(request, "book/home.html")
 
 
 class BookList(ListView):
@@ -61,12 +64,29 @@ def delete_book_by_filtring(request):
     min_price = request.GET.get("min_price")
     max_price = request.GET.get("max_price")
     category = request.GET.get("category")
+
     if pub_date or min_price or max_price or category:
+
         books = BookService.filtering(pub_date, min_price, max_price, category)
-        for book in books:
-            book.delete()
-        return HttpResponse("all books succesfuly deleted")
-    return HttpResponse("please first enter the filter and after click me")
+
+        count = books.count()
+        books.delete()
+
+        return render(
+            request,
+            "book/delete_success.html",
+            {
+                "count": count,
+            },
+        )
+
+    return render(
+        request,
+        "book/delete_success.html",
+        {
+            "error": True,
+        },
+    )
 
 
 class BookFiltering(ListView):

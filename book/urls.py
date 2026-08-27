@@ -9,9 +9,11 @@ from book.views import (
     BookFiltering,
     CreateCategoryView,
     delete_book_by_filtring,
+    home,
 )
 
 urlpatterns = [
+    path("", home, name="home"),
     path("book_list/", BookList.as_view(), name="book_list"),
     path("book_detail/<int:pk>/", BookDetail.as_view(), name="book_detail"),
     path("create_book/", CreateBookView.as_view(), name="create_book"),

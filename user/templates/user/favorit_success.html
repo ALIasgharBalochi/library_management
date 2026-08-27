@@ -1,0 +1,98 @@
+{% extends "book/base.html" %} {% block extra_css %}
+<style>
+  .success-card {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 45px 35px;
+    background: #fff;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  }
+
+  .success-icon {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #fff0f3;
+
+    font-size: 45px;
+
+    animation: heartbeat 1.2s infinite;
+  }
+
+  .success-card h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #212529;
+  }
+
+  .success-card p {
+    color: #6c757d;
+    line-height: 2;
+    margin-bottom: 30px;
+  }
+
+  .success-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .success-buttons .btn {
+    height: 48px;
+    padding: 0 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  @keyframes heartbeat {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.1);
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+
+<div class="success-card">
+  <div class="success-icon">❤️</div>
+
+  <h1>کتاب با موفقیت اضافه شد!</h1>
+
+  <p>
+    این کتاب با موفقیت به لیست کتاب‌های مورد علاقه شما اضافه شد.
+    <br />
+    حالا می‌توانید هر زمان که خواستید به کتاب مورد علاقه‌تان دسترسی داشته باشید.
+  </p>
+
+  <div class="success-buttons">
+    <a href="{% url 'book_list' %}" class="btn btn-primary">
+      📚 مشاهده کتاب‌ها
+    </a>
+
+    <a
+      href="{% url 'user_fav_books' user.id %}"
+      class="btn btn-outline-primary"
+    >
+      ❤️ کتاب‌های مورد علاقه
+    </a>
+  </div>
+</div>
+
+{% endblock %}
