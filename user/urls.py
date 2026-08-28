@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterUser, LoginView, UserFaveBooks, add_to_favarit
+from .views import profile, RegisterUser, LoginView, UserFaveBooks, add_to_favarit
 
 urlpatterns = [
     path("register/", RegisterUser.as_view(), name="register"),
@@ -10,4 +10,5 @@ urlpatterns = [
         add_to_favarit,
         name="add_fav_books",
     ),
+    path("profile/", profile, name="profile"),
 ]

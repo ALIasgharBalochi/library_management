@@ -1,190 +1,55 @@
-{% extends "book/base.html" %} {% block extra_css %}
+{% extends "book/base.html" %} {% block content %}
 
-<style>
-  .login-wrapper {
-    min-height: 600px;
+<section class="mx-auto max-w-2xl px-5 py-12">
+  <div class="reveal rounded-[2.5rem] bg-white p-7 shadow-xl sm:p-12">
+    <span class="text-xs font-black tracking-[.25em] text-black/40">
+      LOGIN
+    </span>
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    <h1 class="mt-2 text-4xl font-black">ورود به BOOKLY</h1>
 
-  .login-card {
-    width: 100%;
-    max-width: 450px;
+    <p class="mt-3 text-sm leading-7 text-black/50">
+      وارد حساب کاربری خودت شو و به کتابخانه‌ات دسترسی پیدا کن.
+    </p>
 
-    background: #fff;
+    <form method="post" class="mt-9 grid gap-5">
+      {% csrf_token %} {% for field in form %}
 
-    padding: 40px;
+      <div>
+        <label class="mb-2 block text-sm font-bold"> {{ field.label }} </label>
 
-    border-radius: 25px;
+        {{ field }} {% if field.errors %}
+        <div class="mt-2 text-sm font-bold text-red-500">
+          {{ field.errors }}
+        </div>
+        {% endif %}
+      </div>
 
-    border: 1px solid #eef0f2;
-
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-  }
-
-  .login-icon {
-    width: 80px;
-    height: 80px;
-
-    margin: 0 auto 20px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #eef4ff;
-
-    font-size: 36px;
-  }
-
-  .login-title {
-    text-align: center;
-
-    font-weight: 800;
-
-    margin-bottom: 8px;
-  }
-
-  .login-description {
-    text-align: center;
-
-    color: #6c757d;
-
-    margin-bottom: 30px;
-  }
-
-  .login-card label {
-    display: block;
-
-    font-weight: 600;
-
-    margin-bottom: 8px;
-  }
-
-  .login-card .form-control {
-    height: 50px;
-
-    border-radius: 12px;
-  }
-
-  .login-card .form-control:focus {
-    border-color: #0d6efd;
-
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.12);
-  }
-
-  .error-box {
-    background: #fff1f2;
-
-    border: 1px solid #fecdd3;
-
-    color: #b42318;
-
-    border-radius: 12px;
-
-    padding: 12px 15px;
-
-    margin-bottom: 20px;
-
-    font-size: 13px;
-  }
-
-  .error-box ul {
-    margin: 0;
-
-    padding-right: 18px;
-  }
-
-  .login-button {
-    width: 100%;
-
-    height: 52px;
-
-    margin-top: 20px;
-
-    border-radius: 13px;
-
-    font-weight: 700;
-
-    font-size: 16px;
-  }
-
-  .register-link {
-    text-align: center;
-
-    margin-top: 25px;
-
-    color: #6c757d;
-  }
-
-  .register-link a {
-    text-decoration: none;
-
-    font-weight: 700;
-  }
-</style>
-
-{% endblock %} {% block content %}
-
-<div class="login-wrapper">
-  <div class="login-card">
-    <div class="login-icon">🔐</div>
-
-    <h1 class="login-title">خوش برگشتی!</h1>
-
-    <p class="login-description">وارد حساب کاربری خودت شو 📚</p>
-
-    <form method="post" novalidate>
-      {% csrf_token %} {% if form.non_field_errors %}
-
-      <div class="error-box">{{ form.non_field_errors }}</div>
-
+      {% endfor %} {% if form.non_field_errors %}
+      <div class="rounded-xl bg-red-50 p-4 text-sm font-bold text-red-500">
+        {{ form.non_field_errors }}
+      </div>
       {% endif %}
 
-      <!-- Username -->
-
-      <div class="mb-3">
-        <label for="{{ form.username.id_for_label }}">
-          {{ form.username.label }}
-        </label>
-
-        {{ form.username }} {% if form.username.errors %}
-
-        <div class="error-box mt-2">{{ form.username.errors }}</div>
-
-        {% endif %}
-      </div>
-
-      <!-- Password -->
-
-      <div class="mb-3">
-        <label for="{{ form.password.id_for_label }}">
-          {{ form.password.label }}
-        </label>
-
-        {{ form.password }} {% if form.password.errors %}
-
-        <div class="error-box mt-2">{{ form.password.errors }}</div>
-
-        {% endif %}
-      </div>
-
-      <button type="submit" class="btn btn-primary login-button">
-        🔐 ورود به حساب
+      <button
+        type="submit"
+        class="rounded-2xl bg-electric px-6 py-4 font-black transition hover:-translate-y-1 hover:shadow-lg"
+      >
+        ورود
       </button>
     </form>
 
-    <div class="register-link">
-      حساب کاربری نداری؟
+    <div class="mt-7 border-t border-black/10 pt-6 text-center text-sm">
+      <span class="text-black/50"> هنوز حساب کاربری نداری؟ </span>
 
-      <a href="{% url 'register' %}"> ثبت نام کن </a>
+      <a
+        href="{% url 'register' %}"
+        class="font-black transition hover:text-electric"
+      >
+        ثبت‌نام کن
+      </a>
     </div>
   </div>
-</div>
+</section>
 
 {% endblock %}

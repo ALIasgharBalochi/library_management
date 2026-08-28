@@ -68,3 +68,7 @@ def add_to_favarit(request, userid, bookid):
             "bookid": bookid,
         },
     )
+
+
+def profile(request):
+    return render(request, "user/profile.html")
