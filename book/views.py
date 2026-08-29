@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, FormView, UpdateView, Del
 from django.urls import reverse_lazy
 from book.form import CrateBookForm, CategoryForm
 from book.service import BookService
+from user.service import UserService
 
 # Create your views here.
 
@@ -21,6 +22,9 @@ class BookList(ListView):
         context = super().get_context_data(**kwargs)
 
         context["categorys"] = Category.objects.all()
+        user = self.request.user
+        if user.is_authenticated:
+            context["favorite_book_ids"] = UserService.get_fave_book(user.id)
 
         return context
 
@@ -107,6 +111,9 @@ class BookFiltering(ListView):
         context = super().get_context_data(**kwargs)
 
         context["categorys"] = Category.objects.all()
+        user = self.request.user
+        if user.is_authenticated:
+            context["favorite_book_ids"] = UserService.get_fave_book(user.id)
 
         return context
 
@@ -126,6 +133,9 @@ class BookSearch(ListView):
         context = super().get_context_data(**kwargs)
 
         context["categorys"] = Category.objects.all()
+        user = self.request.user
+        if user.is_authenticated:
+            context["favorite_book_ids"] = UserService.get_fave_book(user.id)
 
         return context
 

@@ -45,34 +45,44 @@
 
     <form
       action="{% url 'filter' %}"
+      method="get"
       class="grid grid-cols-2 gap-2 rounded-2xl border border-black/10 bg-white p-2 sm:grid-cols-4 lg:grid-cols-1"
     >
+      <!-- Publication Date -->
+
       <input
         type="date"
         name="pub_date"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
+        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none transition focus:bg-white focus:ring-2 focus:ring-electric"
       />
+
+      <!-- Minimum Price -->
 
       <input
         type="number"
         step="0.01"
         name="min_price"
         placeholder="حداقل قیمت"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
+        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none transition focus:bg-white focus:ring-2 focus:ring-electric"
       />
+
+      <!-- Maximum Price -->
 
       <input
         type="number"
         step="0.01"
         name="max_price"
         placeholder="حداکثر قیمت"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
+        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none transition focus:bg-white focus:ring-2 focus:ring-electric"
       />
+
+      <!-- Category -->
 
       <select
         name="category"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
+        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none transition focus:bg-white focus:ring-2 focus:ring-electric"
       >
+        ```
         <option value="">همه دسته‌ها</option>
 
         {% for category in categorys %}
@@ -82,87 +92,33 @@
         {% endfor %}
       </select>
 
+      <!-- Apply Filter -->
+
       <button
         type="submit"
-        class="rounded-xl bg-ink px-4 py-2 font-bold text-white"
+        class="rounded-xl bg-ink px-4 py-2 font-bold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
       >
         اعمال فیلتر
+      </button>
+
+      <!-- Delete Filtered Books -->
+
+      <button
+        type="submit"
+        formaction="{% url 'delete_books_filtering' %}"
+        formmethod="get"
+        class="rounded-xl border border-red-200 bg-red-50 px-4 py-2 font-bold text-red-600 transition hover:-translate-y-0.5 hover:bg-red-600 hover:text-white hover:shadow-lg"
+        onclick="
+          return confirm(
+            'آیا مطمئن هستید که می‌خواهید کتاب‌های مطابق این فیلتر حذف شوند؟',
+          );
+        "
+      >
+        حذف کتاب‌های فیلترشده
       </button>
     </form>
   </div>
 
-  <!-- <div class="mt-8 grid gap-4 lg:grid-cols-[1fr_300px]">
-    <form
-      action="{% url 'search' %}"
-      class="flex h-fit self-start overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-sm focus-within:ring-2 focus-within:ring-electric"
-    >
-      <input
-        name="q"
-        value="{{ request.GET.q }}"
-        class="min-w-0 flex-1 bg-transparent px-4 py-2 outline-none"
-        placeholder="نام کتاب، نویسنده یا کلیدواژه..."
-      />
-
-      <button
-        class="rounded-xl bg-electric px-5 py-2.5 font-black transition hover:scale-105"
-      >
-        جستجو
-      </button>
-    </form>
-
-    <form
-      action="{% url 'search' %}"
-      class="flex overflow-hidden rounded-2xl border border-black/10 bg-white p-2 shadow-sm focus-within:ring-2 focus-within:ring-electric"
-    >
-      <input
-        name="q"
-        value="{{ request.GET.q }}"
-        class="min-w-0 flex-1 bg-transparent px-4 outline-none"
-        placeholder="نام کتاب، نویسنده یا کلیدواژه..."
-      />
-      <button
-        class="rounded-xl bg-electric px-5 py-3 font-black transition hover:scale-105"
-      >
-        جستجو
-      </button>
-    </form>
-    <form
-      action="{% url 'filter' %}"
-      class="grid grid-cols-2 gap-2 rounded-2xl border border-black/10 bg-white p-2 sm:grid-cols-4 lg:grid-cols-1"
-    >
-      <input
-        type="date"
-        name="pub_date"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
-      />
-      <input
-        type="number"
-        step="0.01"
-        name="min_price"
-        placeholder="حداقل قیمت"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
-      />
-      <input
-        type="number"
-        step="0.01"
-        name="max_price"
-        placeholder="حداکثر قیمت"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
-      />
-      <select
-        name="category"
-        class="rounded-xl bg-black/[.03] px-3 py-2 text-sm outline-none"
-      >
-        <option value="">همه دسته‌ها</option>
-        {% for category in categorys %}
-        <option value="{{ category.id }}">{{ category.name }}</option>
-        {% endfor %}
-      </select>
-      <button class="rounded-xl bg-ink px-4 py-2 font-bold text-white">
-        اعمال فیلتر
-      </button>
-    </form>
-  </div> -->
   <div class="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
     {% for book in books %}
 
@@ -256,7 +212,7 @@
             class="group grid h-9 w-9 place-items-center rounded-xl border border-black/10 transition hover:border-red-200 hover:bg-red-50"
             title="افزودن به علاقه‌مندی"
           >
-            {% if book.id in favorite_book_ids %}
+            {% if book in favorite_book_ids %}
 
             <!-- Favorite -->
             <span class="text-lg leading-none text-red-500"> ♥ </span>
