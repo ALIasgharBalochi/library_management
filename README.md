@@ -1,40 +1,124 @@
-# BOOKLY — Local Tailwind Edition
+# 📚 BOOKLY
 
-این نسخه هیچ CDN، فونت خارجی، آیکون‌پک آنلاین، تصویر خارجی یا سرویس خارجی ندارد.
-در زمان اجرای Django، تمام CSS و JavaScript از فایل‌های local پروژه لود می‌شوند.
+BOOKLY یک پروژه مدیریت و کشف کتاب با استفاده از Django است.
 
-## نصب Tailwind به‌صورت Local
+---
 
-در ریشه این پوشه:
+## 🚀 نصب و اجرای پروژه
 
-```bash
-npm install
-npm run dev
-```
-
-برای production:
+### 1. Clone کردن پروژه
 
 ```bash
-npm run build
+git clone https://github.com/ALIasgharBalochi/library_management.git
 ```
 
-بعد از build فایل زیر ساخته می‌شود:
+### 2. ساخت Virtual Environment
 
-book/static/book/css/output.css
-
-## Django
-
-در `settings.py` مطمئن شو:
-
-```python
-INSTALLED_APPS = [
-    # ...
-    "django.contrib.staticfiles",
-]
+```bash
+python -m venv venv
 ```
 
-و در development:
+فعال‌سازی محیط مجازی:
 
-```python
-STATIC_URL = "static/"
+#### Linux / macOS
+
+```bash
+source venv/bin/activate
 ```
+
+#### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. نصب Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. ساخت Migration ها
+
+```bash
+python manage.py makemigrations
+```
+
+### 5. اعمال Migration ها
+
+```bash
+python manage.py migrate
+```
+
+### 6. اجرای پروژه
+
+```bash
+python manage.py runserver
+```
+
+سپس وارد آدرس زیر شوید:
+
+http://127.0.0.1:8000/
+
+---
+
+## 🛠️ تکنولوژی‌های استفاده شده
+
+- Python
+- Django
+- Django ORM
+- SQLite
+- HTML
+- Tailwind CSS
+- Django Templates
+
+---
+
+## ✨ امکانات
+
+- 📚 مدیریت کتاب‌ها
+- ➕ اضافه کردن کتاب
+- ✏️ ویرایش کتاب
+- 🗑️ حذف کتاب
+- 🔎 جستجوی کتاب
+- 🔍 فیلتر کتاب‌ها
+- 👤 ثبت‌نام و ورود کاربران
+- ❤️ افزودن کتاب به علاقه‌مندی‌ها
+- 📖 مشاهده کتاب‌های موردعلاقه
+- 👤 صفحه پروفایل کاربر
+- 🏷️ مدیریت دسته‌بندی کتاب‌ها
+- 🎨 رابط کاربری مدرن با Tailwind CSS
+
+---
+
+## 📁 ساختار پروژه
+
+```text
+lib_manager/
+│
+├── book/
+│   ├── migrations/
+│   ├── templates/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   ├── urls.py
+│   └── ...
+│
+├── lib_manager/
+│   ├── settings.py
+│   ├── urls.py
+│   └── ...
+│
+├── manage.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 👨‍💻 Developer
+
+Built with ❤️ and Django.
+
+**BOOKLY — Curated Library**
