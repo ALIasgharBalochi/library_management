@@ -13,7 +13,7 @@ def home(request):
     return render(request, "book/home.html")
 
 
-class BookList(ListView):
+class BookListBase(ListView):
     model = Book
     template_name = "book/list_books.html"
     context_object_name = "books"
@@ -27,6 +27,10 @@ class BookList(ListView):
             context["favorite_book_ids"] = UserService.get_fave_book(user.id)
 
         return context
+
+
+class BookList(BookListBase):
+    pass
 
 
 class BookDetail(DetailView):
@@ -93,10 +97,7 @@ def delete_book_by_filtring(request):
     )
 
 
-class BookFiltering(ListView):
-    template_name = "book/list_books.html"
-    context_object_name = "books"
-
+class BookFiltering(BookListBase):
     def get_queryset(self):
         pub_date = self.request.GET.get("pub_date")
         min_price = self.request.GET.get("min_price")
@@ -107,20 +108,8 @@ class BookFiltering(ListView):
             books = BookService.filtering(pub_date, min_price, max_price, category)
             return books
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
 
-        context["categorys"] = Category.objects.all()
-        user = self.request.user
-        if user.is_authenticated:
-            context["favorite_book_ids"] = UserService.get_fave_book(user.id)
-
-        return context
-
-
-class BookSearch(ListView):
-    template_name = "book/list_books.html"
-    context_object_name = "books"
+class BookSearch(BookListBase):
 
     def get_queryset(self):
         q = self.request.GET.get("q")
@@ -128,16 +117,6 @@ class BookSearch(ListView):
         if q:
             books = BookService.search(q)
             return books
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context["categorys"] = Category.objects.all()
-        user = self.request.user
-        if user.is_authenticated:
-            context["favorite_book_ids"] = UserService.get_fave_book(user.id)
-
-        return context
 
 
 # category
